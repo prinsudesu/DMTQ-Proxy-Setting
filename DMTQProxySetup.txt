@@ -1,0 +1,53 @@
+DJMAX Technika Q
+
+Setting up Reverse Proxy Server on Xampp
+
+1. Edit httpd.conf
+
+Remove the comment of this three proxy configs
+
+LoadModule proxy_module modules/mod_proxy.so
+LoadModule proxy_connect_module modules/mod_proxy_connect.so
+LoadModule proxy_http_module modules/mod_proxy_http.so
+
+======================================================
+
+2. Edit httpd-proxy.conf
+
+ProxyRequests On
+ProxyVia On
+
+======================================================
+
+3. Edit httpd-vhosts.conf
+
+Add this to a new line
+
+<VirtualHost *:*>
+    ProxyPreserveHost On
+    
+    ProxyPass /dmqglb.mb.pmang.com http://dmqglb.mb.pmang.com/
+    ProxyPassReverse /dmqglb.mb.pmang.com http://dmqglb.mb.pmang.com/
+
+    ProxyPass /pmangplus.com http://pmangplus.com/
+    ProxyPassReverse /pmangplus.com http://pmangplus.com/
+
+    ProxyPass /static.pmangplus.com http://static.pmangplus.com/
+    ProxyPassReverse /static.pmangplus.com http://static.pmangplus.com/
+
+    ProxyPass /www.neonapi.com http://www.neonapi.com/
+    ProxyPassReverse /www.neonapi.com http://www.neonapi.com/
+    
+    ServerName localhost
+</VirtualHost>
+
+======================================================
+
+4. Setting up on android
+
+Edit wifi proxy settings
+
+Proxy hostname: Your-IP-Address ex. 192.168.1.100
+Proxy port: 80
+
+You can start the game without HostsGo App!
